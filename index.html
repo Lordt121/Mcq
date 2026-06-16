@@ -14,13 +14,13 @@
     <header class="sheet-header">
       <div class="sheet-header__top">
         <div>
-          <div class="sheet-eyebrow">Form A · Auto-Graded</div>
+          <div class="sheet-eyebrow">Auto-Graded · MCQ System</div>
           <h1 class="sheet-title">MCQ Assessment</h1>
         </div>
         <div class="sheet-meta" id="question-count">Loading…</div>
       </div>
       <hr class="sheet-rule" />
-      <p class="sheet-sub">Select one answer per question, then submit to see your score and a full answer review.</p>
+      <p class="sheet-sub">Enter your name, then either take the quiz online or upload a filled answer sheet CSV.</p>
     </header>
 
     <div class="field-block">
@@ -31,14 +31,43 @@
     <div id="notice-area"></div>
     <div id="results-container"></div>
 
-    <form id="quiz-form">
-      <div id="questions-container">
-        <div class="empty-state">Loading questions…</div>
+    <!-- MODE TABS -->
+    <div class="admin-tabs" style="margin-bottom:18px">
+      <button class="admin-tab is-active" id="tab-quiz-btn">Take Quiz Online</button>
+      <button class="admin-tab" id="tab-upload-btn">Upload Answer Sheet</button>
+    </div>
+
+    <!-- ONLINE QUIZ -->
+    <div id="mode-quiz">
+      <form id="quiz-form">
+        <div id="questions-container">
+          <div class="empty-state">Loading questions…</div>
+        </div>
+        <div class="actions">
+          <button type="submit" class="btn" id="submit-btn">Submit answers</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- CSV UPLOAD -->
+    <div id="mode-upload" style="display:none">
+      <div class="field-block">
+        <h2 class="admin-card-title">Step 1 — Download the answer sheet template</h2>
+        <p class="sheet-sub" style="margin-top:0">Download this CSV, fill in column B with your answers (A, B, C or D), then upload it below.</p>
+        <div class="actions" style="margin-top:14px">
+          <button class="btn btn--secondary" id="download-template-btn">Download Template CSV</button>
+        </div>
       </div>
-      <div class="actions">
-        <button type="submit" class="btn" id="submit-btn">Submit answers</button>
+
+      <div class="field-block">
+        <h2 class="admin-card-title">Step 2 — Upload your filled answer sheet</h2>
+        <label class="field-label" for="csv-upload">Select your CSV file</label>
+        <input type="file" id="csv-upload" accept=".csv" class="field-input" style="padding:8px" />
+        <div class="actions" style="margin-top:14px">
+          <button class="btn" id="grade-csv-btn">Grade my answers</button>
+        </div>
       </div>
-    </form>
+    </div>
 
     <div class="sheet-footer">
       <a href="admin.html">Admin</a>
