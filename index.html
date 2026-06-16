@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>MCQ Assessment</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+            <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+              <link rel="stylesheet" href="styles.css" />
+              </head>
+              <body>
+                <div class="sheet">
+                    <header class="sheet-header">
+                          <div class="sheet-header__top">
+                                  <div>
+                                            <div class="sheet-eyebrow">Form A · Auto-Graded</div>
+                                                      <h1 class="sheet-title">MCQ Assessment</h1>
+                                                              </div>
+                                                                      <div class="sheet-meta" id="question-count">Loading…</div>
+                                                                            </div>
+                                                                                  <hr class="sheet-rule" />
+                                                                                        <p class="sheet-sub">Select one answer per question, then submit to see your score and a full answer review.</p>
+                                                                                            </header>
+
+                                                                                                <div class="field-block">
+                                                                                                      <label class="field-label" for="student-name">Your name</label>
+                                                                                                            <input type="text" id="student-name" class="field-input" placeholder="e.g. Jordan Smith" autocomplete="name" />
+                                                                                                                </div>
+
+                                                                                                                    <div id="notice-area"></div>
+                                                                                                                        <div id="results-container"></div>
+
+                                                                                                                            <form id="quiz-form">
+                                                                                                                                  <div id="questions-container">
+                                                                                                                                          <div class="empty-state">Loading questions…</div>
+                                                                                                                                                </div>
+                                                                                                                                                      <div class="actions">
+                                                                                                                                                              <button type="submit" class="btn" id="submit-btn">Submit answers</button>
+                                                                                                                                                                    </div>
+                                                                                                                                                                        </form>
+
+                                                                                                                                                                            <div class="sheet-footer">
+                                                                                                                                                                                  <a href="admin.html">Admin</a>
+                                                                                                                                                                                      </div>
+                                                                                                                                                                                        </div>
+                                                                                                                                                                                          <script type="module" src="quiz.js"></script>
+                                                                                                                                                                                          </body>
+                                                                                                                                                                                          </html>
