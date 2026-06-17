@@ -11,32 +11,29 @@
 </head>
 <body>
 
-  <!-- NAVIGATION -->
   <nav class="navbar">
     <div class="navbar__brand">
       <span class="navbar__logo">&#9711;</span>
       MCQ Grade System
     </div>
     <div class="navbar__links">
-      <a href="#dashboard" class="navbar__link is-active" data-section="dashboard">Dashboard</a>
-      <a href="#quiz" class="navbar__link" data-section="quiz">Take Quiz</a>
-      <a href="#upload" class="navbar__link" data-section="upload">Upload Sheet</a>
+      <a href="#" class="navbar__link is-active" data-section="dashboard">Dashboard</a>
+      <a href="#" class="navbar__link" data-section="quiz">Take Quiz</a>
+      <a href="#" class="navbar__link" data-section="upload">Upload Sheet</a>
     </div>
   </nav>
 
-  <!-- HERO / DASHBOARD -->
   <section class="section is-active" id="dashboard">
     <div class="hero">
       <div class="hero__badge">Automated Grading Platform</div>
       <h1 class="hero__title">MCQ Grade System</h1>
-      <p class="hero__sub">Upload your answer sheet or take a quiz online. Get instant scores, detailed feedback, and full answer reviews automatically.</p>
+      <p class="hero__sub">Upload your answer sheet or take a quiz online. Get instant scores, detailed feedback, and full answer reviews — automatically.</p>
       <div class="hero__actions">
-  <button class="btn btn--primary" data-section="quiz">Take Quiz Now</button>
-  <button class="btn btn--outline" data-section="upload">Upload Answer Sheet</button>
-</div>
+        <button class="btn btn--primary" id="go-quiz-btn">Take Quiz Now</button>
+        <button class="btn btn--outline" id="go-upload-btn">Upload Answer Sheet</button>
+      </div>
     </div>
 
-    <!-- FEATURE CARDS -->
     <div class="features">
       <div class="feature-card">
         <div class="feature-card__icon">📋</div>
@@ -70,7 +67,6 @@
       </div>
     </div>
 
-    <!-- HOW IT WORKS -->
     <div class="how-it-works">
       <h2 class="section-title">How It Works</h2>
       <div class="steps">
@@ -101,10 +97,9 @@
     </div>
   </section>
 
-  <!-- TAKE QUIZ SECTION -->
   <section class="section" id="quiz">
     <div class="page-header">
-      <button class="back-btn" onclick="navigate('dashboard')">← Back</button>
+      <button class="back-btn" id="back-btn-quiz">← Back</button>
       <div>
         <div class="page-eyebrow">Online Quiz</div>
         <h2 class="page-title">Take the Quiz</h2>
@@ -125,15 +120,14 @@
         <div class="empty-state">Loading questions…</div>
       </div>
       <div class="form-actions">
-        <button type="submit" class="btn btn--primary" id="submit-btn">Submit Answers</button>
+        <button type="submit" class="btn btn--navy" id="submit-btn">Submit Answers</button>
       </div>
     </form>
   </section>
 
-  <!-- UPLOAD SECTION -->
   <section class="section" id="upload">
     <div class="page-header">
-      <button class="back-btn" onclick="navigate('dashboard')">← Back</button>
+      <button class="back-btn" id="back-btn-upload">← Back</button>
       <div>
         <div class="page-eyebrow">Answer Sheet Upload</div>
         <h2 class="page-title">Upload & Grade</h2>
@@ -154,7 +148,7 @@
         <div>
           <h3 class="upload-step__title">Download the answer sheet template</h3>
           <p class="upload-step__text">Get the CSV template with all questions pre-filled. You just fill in column B with A, B, C, or D.</p>
-          <button class="btn btn--outline" id="download-template-btn" style="margin-top:12px">Download Template CSV</button>
+          <button class="btn btn--ghost" id="download-template-btn" style="margin-top:12px">Download Template CSV</button>
         </div>
       </div>
       <div class="upload-divider"></div>
@@ -163,13 +157,13 @@
         <div style="width:100%">
           <h3 class="upload-step__title">Upload your completed answer sheet</h3>
           <p class="upload-step__text">Open the template in any spreadsheet app, fill in your answers, save it, then upload it here.</p>
-          <div class="file-drop" id="file-drop">
+          <div class="file-drop">
             <div class="file-drop__icon">📂</div>
             <div class="file-drop__text">Tap to select your CSV file</div>
             <input type="file" id="csv-upload" accept=".csv" />
           </div>
           <div id="file-name" class="file-name"></div>
-          <button class="btn btn--primary" id="grade-csv-btn" style="margin-top:16px;width:100%">Grade My Answers</button>
+          <button class="btn btn--navy" id="grade-csv-btn" style="margin-top:16px;width:100%">Grade My Answers</button>
         </div>
       </div>
     </div>
