@@ -17,9 +17,9 @@
       MCQ Grade System
     </div>
     <div class="navbar__links">
-      <a href="#" class="navbar__link is-active" data-section="dashboard">Dashboard</a>
-      <a href="#" class="navbar__link" data-section="quiz">Take Quiz</a>
-      <a href="#" class="navbar__link" data-section="upload">Upload Sheet</a>
+      <a href="#" class="navbar__link is-active" onclick="navigate('dashboard');return false;">Dashboard</a>
+      <a href="#" class="navbar__link" onclick="navigate('quiz');return false;">Take Quiz</a>
+      <a href="#" class="navbar__link" onclick="navigate('upload');return false;">Upload Sheet</a>
     </div>
   </nav>
 
@@ -29,8 +29,8 @@
       <h1 class="hero__title">MCQ Grade System</h1>
       <p class="hero__sub">Upload your answer sheet or take a quiz online. Get instant scores, detailed feedback, and full answer reviews — automatically.</p>
       <div class="hero__actions">
-        <button class="btn btn--primary" id="go-quiz-btn">Take Quiz Now</button>
-        <button class="btn btn--outline" id="go-upload-btn">Upload Answer Sheet</button>
+        <button class="btn btn--primary" onclick="navigate('quiz')">Take Quiz Now</button>
+        <button class="btn btn--outline" onclick="navigate('upload')">Upload Answer Sheet</button>
       </div>
     </div>
 
@@ -99,7 +99,7 @@
 
   <section class="section" id="quiz">
     <div class="page-header">
-      <button class="back-btn" id="back-btn-quiz">← Back</button>
+      <button class="back-btn" onclick="navigate('dashboard')">← Back</button>
       <div>
         <div class="page-eyebrow">Online Quiz</div>
         <h2 class="page-title">Take the Quiz</h2>
@@ -127,7 +127,7 @@
 
   <section class="section" id="upload">
     <div class="page-header">
-      <button class="back-btn" id="back-btn-upload">← Back</button>
+      <button class="back-btn" onclick="navigate('dashboard')">← Back</button>
       <div>
         <div class="page-eyebrow">Answer Sheet Upload</div>
         <h2 class="page-title">Upload & Grade</h2>
@@ -147,7 +147,7 @@
         <div class="upload-step__num">1</div>
         <div>
           <h3 class="upload-step__title">Download the answer sheet template</h3>
-          <p class="upload-step__text">Get the CSV template with all questions pre-filled. You just fill in column B with A, B, C, or D.</p>
+          <p class="upload-step__text">Get the CSV template with all questions pre-filled. Fill in column B with A, B, C, or D.</p>
           <button class="btn btn--ghost" id="download-template-btn" style="margin-top:12px">Download Template CSV</button>
         </div>
       </div>
@@ -156,7 +156,7 @@
         <div class="upload-step__num">2</div>
         <div style="width:100%">
           <h3 class="upload-step__title">Upload your completed answer sheet</h3>
-          <p class="upload-step__text">Open the template in any spreadsheet app, fill in your answers, save it, then upload it here.</p>
+          <p class="upload-step__text">Fill in your answers, save the file, then upload it here.</p>
           <div class="file-drop">
             <div class="file-drop__icon">📂</div>
             <div class="file-drop__text">Tap to select your CSV file</div>
@@ -168,6 +168,16 @@
       </div>
     </div>
   </section>
+
+  <!-- Navigation handled here before module loads -->
+  <script>
+    function navigate(sectionId) {
+      document.querySelectorAll(".section").forEach((s) => s.classList.remove("is-active"));
+      document.querySelectorAll(".navbar__link").forEach((l) => l.classList.remove("is-active"));
+      document.getElementById(sectionId).classList.add("is-active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
 
   <script type="module" src="quiz.js"></script>
 </body>
