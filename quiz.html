@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Take Quiz · MCQ Grade System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar__brand">
+      <span class="navbar__logo">&#9711;</span>
+      MCQ Grade System
+    </div>
+    <div class="navbar__links">
+      <a href="index.html" class="navbar__link">Dashboard</a>
+      <a href="quiz.html" class="navbar__link is-active">Take Quiz</a>
+      <a href="upload.html" class="navbar__link">Upload Sheet</a>
+    </div>
+  </nav>
+
+  <div class="section is-active">
+    <div class="page-header">
+      <a href="index.html" class="back-btn">← Back</a>
+      <div>
+        <div class="page-eyebrow">Online Quiz</div>
+        <h2 class="page-title">Take the Quiz</h2>
+      </div>
+      <div class="page-meta" id="question-count">Loading…</div>
+    </div>
+
+    <div class="name-block">
+      <label class="field-label" for="student-name-quiz">Your name</label>
+      <input type="text" id="student-name-quiz" class="field-input" placeholder="e.g. Brian Smith" autocomplete="name" />
+    </div>
+
+    <div id="quiz-notice"></div>
+    <div id="quiz-results"></div>
+
+    <form id="quiz-form">
+      <div id="questions-container">
+        <div class="empty-state">Loading questions…</div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn--navy" id="submit-btn">Submit Answers</button>
+      </div>
+    </form>
+  </div>
+
+  <script type="module" src="quiz.js"></script>
+</body>
+</html>
