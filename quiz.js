@@ -28,23 +28,39 @@ const gradeCsvBtn = document.getElementById("grade-csv-btn");
 const csvUpload = document.getElementById("csv-upload");
 const fileNameEl = document.getElementById("file-name");
 
-// ---- Navigation ----
+// ============================================================
+// NAVIGATION
+// ============================================================
+
 function navigate(sectionId) {
   document.querySelectorAll(".section").forEach((s) => s.classList.remove("is-active"));
-  document.querySelectorAll(".navbar__link, [data-section]").forEach((l) => l.classList.remove("is-active"));
+  document.querySelectorAll(".navbar__link").forEach((l) => l.classList.remove("is-active"));
   document.getElementById(sectionId).classList.add("is-active");
-  document.querySelectorAll(`[data-section="${sectionId}"]`).forEach((el) => el.classList.add("is-active"));
+  const activeLink = document.querySelector(`.navbar__link[data-section="${sectionId}"]`);
+  if (activeLink) activeLink.classList.add("is-active");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-document.querySelectorAll("[data-section]").forEach((btn) => {
-  btn.addEventListener("click", (e) => {
+// Navbar links
+document.querySelectorAll(".navbar__link").forEach((link) => {
+  link.addEventListener("click", (e) => {
     e.preventDefault();
-    navigate(btn.dataset.section);
+    navigate(link.dataset.section);
   });
 });
 
-// ---- Utilities ----
+// Hero buttons
+document.getElementById("go-quiz-btn").addEventListener("click", () => navigate("quiz"));
+document.getElementById("go-upload-btn").addEventListener("click", () => navigate("upload"));
+
+// Back buttons
+document.getElementById("back-btn-quiz").addEventListener("click", () => navigate("dashboard"));
+document.getElementById("back-btn-upload").addEventListener("click", () => navigate("dashboard"));
+
+// ============================================================
+// UTILITIES
+// ============================================================
+
 function escapeHtml(str) {
   const div = document.createElement("div");
   div.textContent = str ?? "";
@@ -64,7 +80,10 @@ csvUpload.addEventListener("change", () => {
   fileNameEl.textContent = file ? `Selected: ${file.name}` : "";
 });
 
-// ---- Load questions ----
+// ============================================================
+// LOAD QUESTIONS
+// ============================================================
+
 async function loadQuestions() {
   try {
     const q = query(collection(db, "questions"), orderBy("order", "asc"));
@@ -87,7 +106,10 @@ async function loadQuestions() {
   renderQuestions();
 }
 
-// ---- Render quiz ----
+// ============================================================
+// RENDER QUIZ
+// ============================================================
+
 function renderQuestions() {
   questionsContainer.innerHTML = "";
   questions.forEach((item, index) => {
@@ -123,7 +145,10 @@ function renderQuestions() {
   });
 }
 
-// ---- Online quiz submit ----
+// ============================================================
+// ONLINE QUIZ SUBMIT
+// ============================================================
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (locked) return;
@@ -166,7 +191,10 @@ form.addEventListener("submit", async (e) => {
   quizResults.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
-// ---- Grade quiz UI ----
+// ============================================================
+// GRADE QUIZ UI
+// ============================================================
+
 function gradeQuizUI(details) {
   details.forEach((d) => {
     const card = questionsContainer.querySelector(`.question[data-id="${d.questionId}"]`);
@@ -194,7 +222,10 @@ function gradeQuizUI(details) {
   });
 }
 
-// ---- Download CSV template ----
+// ============================================================
+// DOWNLOAD CSV TEMPLATE
+// ============================================================
+
 downloadTemplateBtn.addEventListener("click", () => {
   if (questions.length === 0) {
     showNotice(uploadNotice, "Questions not loaded yet. Try again in a moment.");
@@ -215,7 +246,10 @@ downloadTemplateBtn.addEventListener("click", () => {
   URL.revokeObjectURL(url);
 });
 
-// ---- Grade uploaded CSV ----
+// ============================================================
+// GRADE UPLOADED CSV
+// ============================================================
+
 gradeCsvBtn.addEventListener("click", async () => {
   clearNotice(uploadNotice);
   uploadResults.innerHTML = "";
@@ -269,7 +303,10 @@ gradeCsvBtn.addEventListener("click", async () => {
   gradeCsvBtn.textContent = "Grade My Answers";
 });
 
-// ---- Score card ----
+// ============================================================
+// SCORE CARD
+// ============================================================
+
 function renderScoreCard(container, name, score, total) {
   const pct = total > 0 ? Math.round((score / total) * 100) : 0;
   const passed = pct >= 50;
@@ -285,7 +322,10 @@ function renderScoreCard(container, name, score, total) {
   `;
 }
 
-// ---- CSV answer review ----
+// ============================================================
+// CSV ANSWER REVIEW
+// ============================================================
+
 function renderCsvReview(container, details) {
   let html = "";
   details.forEach((d, index) => {
@@ -311,5 +351,9 @@ function renderCsvReview(container, details) {
   });
   container.innerHTML += html;
 }
+
+// ============================================================
+// KICK OFF
+// ============================================================
 
 loadQuestions();
