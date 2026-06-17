@@ -17,9 +17,9 @@
       MCQ Grade System
     </div>
     <div class="navbar__links">
-      <a href="#" class="navbar__link is-active" onclick="navigate('dashboard');return false;">Dashboard</a>
-      <a href="#" class="navbar__link" onclick="navigate('quiz');return false;">Take Quiz</a>
-      <a href="#" class="navbar__link" onclick="navigate('upload');return false;">Upload Sheet</a>
+      <a href="index.html" class="navbar__link is-active">Dashboard</a>
+      <a href="quiz.html" class="navbar__link">Take Quiz</a>
+      <a href="upload.html" class="navbar__link">Upload Sheet</a>
     </div>
   </nav>
 
@@ -29,8 +29,8 @@
       <h1 class="hero__title">MCQ Grade System</h1>
       <p class="hero__sub">Upload your answer sheet or take a quiz online. Get instant scores, detailed feedback, and full answer reviews — automatically.</p>
       <div class="hero__actions">
-        <button class="btn btn--primary" onclick="navigate('quiz')">Take Quiz Now</button>
-        <button class="btn btn--outline" onclick="navigate('upload')">Upload Answer Sheet</button>
+        <a href="quiz.html" class="btn btn--primary">Take Quiz Now</a>
+        <a href="upload.html" class="btn btn--outline">Upload Answer Sheet</a>
       </div>
     </div>
 
@@ -97,88 +97,5 @@
     </div>
   </section>
 
-  <section class="section" id="quiz">
-    <div class="page-header">
-      <button class="back-btn" onclick="navigate('dashboard')">← Back</button>
-      <div>
-        <div class="page-eyebrow">Online Quiz</div>
-        <h2 class="page-title">Take the Quiz</h2>
-      </div>
-      <div class="page-meta" id="question-count">Loading…</div>
-    </div>
-
-    <div class="name-block">
-      <label class="field-label" for="student-name-quiz">Your name</label>
-      <input type="text" id="student-name-quiz" class="field-input" placeholder="e.g. Brian Smith" autocomplete="name" />
-    </div>
-
-    <div id="quiz-notice"></div>
-    <div id="quiz-results"></div>
-
-    <form id="quiz-form">
-      <div id="questions-container">
-        <div class="empty-state">Loading questions…</div>
-      </div>
-      <div class="form-actions">
-        <button type="submit" class="btn btn--navy" id="submit-btn">Submit Answers</button>
-      </div>
-    </form>
-  </section>
-
-  <section class="section" id="upload">
-    <div class="page-header">
-      <button class="back-btn" onclick="navigate('dashboard')">← Back</button>
-      <div>
-        <div class="page-eyebrow">Answer Sheet Upload</div>
-        <h2 class="page-title">Upload & Grade</h2>
-      </div>
-    </div>
-
-    <div class="name-block">
-      <label class="field-label" for="student-name-upload">Your name</label>
-      <input type="text" id="student-name-upload" class="field-input" placeholder="e.g. Brian Smith" autocomplete="name" />
-    </div>
-
-    <div id="upload-notice"></div>
-    <div id="upload-results"></div>
-
-    <div class="upload-card">
-      <div class="upload-step">
-        <div class="upload-step__num">1</div>
-        <div>
-          <h3 class="upload-step__title">Download the answer sheet template</h3>
-          <p class="upload-step__text">Get the CSV template with all questions pre-filled. Fill in column B with A, B, C, or D.</p>
-          <button class="btn btn--ghost" id="download-template-btn" style="margin-top:12px">Download Template CSV</button>
-        </div>
-      </div>
-      <div class="upload-divider"></div>
-      <div class="upload-step">
-        <div class="upload-step__num">2</div>
-        <div style="width:100%">
-          <h3 class="upload-step__title">Upload your completed answer sheet</h3>
-          <p class="upload-step__text">Fill in your answers, save the file, then upload it here.</p>
-          <div class="file-drop">
-            <div class="file-drop__icon">📂</div>
-            <div class="file-drop__text">Tap to select your CSV file</div>
-            <input type="file" id="csv-upload" accept=".csv" />
-          </div>
-          <div id="file-name" class="file-name"></div>
-          <button class="btn btn--navy" id="grade-csv-btn" style="margin-top:16px;width:100%">Grade My Answers</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Navigation handled here before module loads -->
-  <script>
-    function navigate(sectionId) {
-      document.querySelectorAll(".section").forEach((s) => s.classList.remove("is-active"));
-      document.querySelectorAll(".navbar__link").forEach((l) => l.classList.remove("is-active"));
-      document.getElementById(sectionId).classList.add("is-active");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  </script>
-
-  <script type="module" src="quiz.js"></script>
 </body>
 </html>
