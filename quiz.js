@@ -13,7 +13,6 @@ let questions = [];
 const selected = {};
 let locked = false;
 
-// ---- DOM ----
 const questionsContainer = document.getElementById("questions-container");
 const quizResults = document.getElementById("quiz-results");
 const uploadResults = document.getElementById("upload-results");
@@ -30,19 +29,18 @@ const csvUpload = document.getElementById("csv-upload");
 const fileNameEl = document.getElementById("file-name");
 
 // ---- Navigation ----
-window.navigate = function (section) {
+function navigate(sectionId) {
   document.querySelectorAll(".section").forEach((s) => s.classList.remove("is-active"));
-  document.querySelectorAll(".navbar__link").forEach((l) => l.classList.remove("is-active"));
-  document.getElementById(section).classList.add("is-active");
-  const link = document.querySelector(`.navbar__link[data-section="${section}"]`);
-  if (link) link.classList.add("is-active");
+  document.querySelectorAll(".navbar__link, [data-section]").forEach((l) => l.classList.remove("is-active"));
+  document.getElementById(sectionId).classList.add("is-active");
+  document.querySelectorAll(`[data-section="${sectionId}"]`).forEach((el) => el.classList.add("is-active"));
   window.scrollTo({ top: 0, behavior: "smooth" });
-};
+}
 
-document.querySelectorAll(".navbar__link").forEach((link) => {
-  link.addEventListener("click", (e) => {
+document.querySelectorAll("[data-section]").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
     e.preventDefault();
-    navigate(link.dataset.section);
+    navigate(btn.dataset.section);
   });
 });
 
@@ -61,13 +59,12 @@ function clearNotice(el) {
   el.innerHTML = "";
 }
 
-// ---- Show file name when selected ----
 csvUpload.addEventListener("change", () => {
   const file = csvUpload.files[0];
   fileNameEl.textContent = file ? `Selected: ${file.name}` : "";
 });
 
-// ---- Load questions from Firestore ----
+// ---- Load questions ----
 async function loadQuestions() {
   try {
     const q = query(collection(db, "questions"), orderBy("order", "asc"));
@@ -90,14 +87,13 @@ async function loadQuestions() {
   renderQuestions();
 }
 
-// ---- Render quiz bubbles ----
+// ---- Render quiz ----
 function renderQuestions() {
   questionsContainer.innerHTML = "";
   questions.forEach((item, index) => {
     const card = document.createElement("div");
     card.className = "question";
     card.dataset.id = item.id;
-
     card.innerHTML = `
       <div class="question__head">
         <span class="question__number">Q${index + 1}</span>
@@ -105,12 +101,10 @@ function renderQuestions() {
       </div>
       <div class="options"></div>
     `;
-
     const optionsWrap = card.querySelector(".options");
     LETTERS.forEach((letter) => {
       const optionText = item.options?.[letter];
       if (!optionText) return;
-
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "option";
@@ -125,7 +119,6 @@ function renderQuestions() {
       });
       optionsWrap.appendChild(btn);
     });
-
     questionsContainer.appendChild(card);
   });
 }
@@ -307,7 +300,11 @@ function renderCsvReview(container, details) {
       if (isSelected) cls += " is-selected";
       if (isCorrect) cls += " is-correct-answer";
       if (isWrong) cls += " is-wrong-selection";
-      let tag = isCorrect ? '<span class="option__tag option__tag--correct">Correct</span>' : isWrong ? '<span class="option__tag option__tag--your-pick">Your answer</span>' : "";
+      const tag = isCorrect
+        ? '<span class="option__tag option__tag--correct">Correct</span>'
+        : isWrong
+        ? '<span class="option__tag option__tag--your-pick">Your answer</span>'
+        : "";
       html += `<div class="${cls}"><span class="bubble">${letter}</span><span>${escapeHtml(text)}</span>${tag}</div>`;
     });
     html += "</div></div>";
