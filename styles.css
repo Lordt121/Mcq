@@ -834,3 +834,18 @@ a { color: var(--navy-light); text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
+.hero__actions {
+  position: relative;
+  z-index: 10;
+}
+
+.hero__actions a {
+  display: inline-block;
+  position: relative;
+  z-index: 10;
+}
+
+.section.is-active {
+  position: relative;
+  z-index: 1;
+}
